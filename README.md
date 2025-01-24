@@ -14,7 +14,11 @@ La función **json_loader_data** se encarga de formatear los datos cargados al b
 En este bucket se reciben los datos, y por medio de un trigger de S3 obtenemos la información del archivo en la lambda y lo operamos separando la fecha. 
 A su finalización, creamos un archivo de guardado ordenado mediante directorios por año/mes/dia la información procesada en archivo .json y .csv para su futuro manejo.
 
-Después, en la función **lambda_5** se publica una API publica configurada para accesar a los datos ya procesados, esto mediante un formateo de strings se obtiene siempre el archivo de la fecha del día actual. 
+Después, en la función **lambda_5** se publica una API publica configurada para accesar a los datos ya procesados, esto mediante un formateo de strings se obtiene el archivo deseado en la fecha deseada. para acceder a la fecha designada se agrega a la ruta. Ej: 
+
+https://vpjswafixlv2mdrfxgl7q7b6nm0cxwrn.lambda-url.us-east-1.on.aws/data/processed/2025/1/24
+
+(PENDIENTE) 
 Esta API es consumida por otro bucket con una página estática, para que el archivo de visualización "index.html" (anexado para evidencia) se muestre el formato adecuado de la tabla con la información actualizada.
 
 
