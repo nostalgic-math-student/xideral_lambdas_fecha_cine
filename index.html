@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Transactions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Transactions</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Movie</th>
+                <th>Tickets</th>
+                <th>Seats</th>
+                <th>Payment Method</th>
+                <th>Total Price</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody id="transaction-table-body">
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        async function fetchTransactions() {
+            try {
+                // Cambia esta URL por la de tu API
+                const response = await fetch('https://vpjswafixlv2mdrfxgl7q7b6nm0cxwrn.lambda-url.us-east-1.on.aws/json_data');
+                if (!response.ok) {
+                    throw new Error("HTTP error! status: ${response.status}");
+                }
+
+                const transactions = await response.json();
+                const tableBody = document.getElementById('transaction-table-body');
+
+                transactions.forEach(transaction => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${transaction.transactionId}</td>
+                        <td>${transaction.movie}</td>
+                        <td>${transaction.ticketQuantity}</td>
+                        <td>${transaction.seats.join(', ')}</td>
+                        <td>${transaction.paymentMethod}</td>
+                        <td>${transaction.totalPrice}</td>
+                        <td>${transaction.dia}/${transaction.mes}/${transaction.anio}</td>
+                        <td>${transaction.hora}:${transaction.minuto}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+            }
+        }
+
+        // Llamar a la función para cargar los datos al cargar la página
+        fetchTransactions();
+    </script>
+</body>
+</html>
