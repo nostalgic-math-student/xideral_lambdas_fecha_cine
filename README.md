@@ -18,8 +18,7 @@ Después, en la función **lambda_5** se publica una API publica configurada par
 
 https://vpjswafixlv2mdrfxgl7q7b6nm0cxwrn.lambda-url.us-east-1.on.aws/data/processed/2025/1/24
 
-(PENDIENTE) 
-Esta API es consumida por otro bucket con una página estática, para que el archivo de visualización "index.html" (anexado para evidencia) se muestre el formato adecuado de la tabla con la información actualizada.
+Nota: Lambda_5 se divide en dos archivos en el servicio, **main.py** y **utils.py**.
 
 
 
